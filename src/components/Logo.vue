@@ -1,20 +1,25 @@
 <template>
   <div class="Logo">
-    <p>Lucullus</p>
+    <h1>Lucullus</h1>
   </div>
 </template>
 
 <script>
 
 export default {
-  components: {
-  }
+  components: {}
 }
 </script>
 
 <style scoped>
-.logo{
-  color: #FFFFFF;
-  font-size: 24px;
-}
+  .Logo {
+    margin: 0 48%;
+  }
+
+  h1 {
+    color: #7e7e7e;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    font-weight: lighter;
+  }
 </style>

@@ -1,11 +1,7 @@
 <template>
-  <div class="homePage">
+  <div class="articleCategoryPage">
     <header-component></header-component>
-    <ul>
-      <li v-for="article in articles" :key="article.title">
-        <articleShortView-component v-bind:value="article"></articleShortView-component>
-      </li>
-    </ul>
+    <articleShortView-component :key="article.title" v-for="article in articles" v-bind:value="article"></articleShortView-component>
     <v-dialog name="errorResponse"/>
   </div>
 </template>
@@ -16,7 +12,6 @@ import articleShortView from '@/components/article/articleShortView.vue'
 import axios from 'axios'
 
 export default {
-  name: 'HomePage',
   components: {
     'header-component': header,
     'articleShortView-component': articleShortView
@@ -24,27 +19,22 @@ export default {
   data () {
     return {
       articles: [
-        {
-          title: '',
-          category: '',
-          author: '',
-          tags: [],
-          content: '',
-          likes: ''
-        }
+        {title: '', category: '', author: '', tags: []}
       ]
     }
   },
   created () {
-    axios.get('http://localhost:4000/api/query/article/recent')
+    axios.get('http://localhost:4000/api/query/article/author/' + this.$route.params.author, {
+      withCredentials: true
+    })
       .then(response => {
-        this.articles = response.data;
-        console.log(response.data);
+        this.articles = response.data
+        console.log(this.articles)
       })
       .catch(error =>{
         this.$modal.show('dialog', {
           title: 'Alert',
-          text: 'Something goes wrong',
+          text: 'There is nothing here',
           buttons: [
             {
               title: 'Close'
@@ -57,8 +47,4 @@ export default {
 </script>
 
 <style scoped>
-  li {
-    display:inline;
-    font-family: 'Istok Web', sans-serif;
-  }
 </style>

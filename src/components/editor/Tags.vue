@@ -1,39 +1,41 @@
 <template>
   <div class="Container">
-      <span v-for="tag in value" class="tags">
+      <span v-if="tag!=''" v-for="tag in value" class="tags">
         <div>{{ tag }}</div>
-        <button type="button" class="removeTag" @click="removeTag(tag)">&times;</button>
+        <button type="button" class="removeTag" v-on:click="removeTag(tag)">&times;</button>
       </span>
-      <div class="">
+      <div class="inputField">
         <input class="inputField" placeholder="Add tag..." @keydown.enter.prevent="addTag" v-model="newTag">
       </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   props: ['value'],
-  data() {
+  data () {
     return {
-      newTag: '',
+      newTag: ''
     }
   },
   methods: {
-    addTag() {
+    addTag () {
       if (this.newTag.trim().length === 0 || this.value.includes(this.newTag.trim())) {
         return
       }
       this.$emit('input', [...this.value, this.newTag.trim()])
       this.newTag = ''
     },
-    removeTag(tag) {
+    removeTag (tag) {
       this.$emit('input', this.value.filter(t => t !== tag))
-    },
-  },
+    }
+  }
 }
 </script>
 
-<style scope>
+<style scoped>
 .tags {
   display: inline-flex;
   line-height: 1;
@@ -63,6 +65,7 @@ export default {
   color: #FFFFFF;
   border: none;
   font-size: 16px;
+  margin-top: 10px;
 }
 .inputField::placeholder{
   color: #676973

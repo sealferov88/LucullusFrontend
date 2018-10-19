@@ -11,8 +11,6 @@ import header from '@/components/Header.vue'
 
 export default {
   name: 'EditorPage',
-  data () {
-  },
   components: {
     'area-component': area,
     'header-component': header,
@@ -26,7 +24,6 @@ export default {
   min-height: 0;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
 }
 
 .content {

@@ -24,14 +24,12 @@ export default {
 <style>
 
 #app {
-  @import url('https://fontstorage.com/ru/font/montserrat');
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 body {
-  display:block;
-  margin: 0;
-  position:relative;
-  height: 100vh;
+  overflow-x: hidden;
+  margin: 0 0;
+  background-color: #2E323E;
 }
 </style>

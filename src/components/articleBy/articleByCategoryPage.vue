@@ -1,5 +1,5 @@
 <template>
-  <div class="homePage">
+  <div class="articleCategoryPage">
     <header-component></header-component>
     <ul>
       <li v-for="article in articles" :key="article.title">
@@ -16,35 +16,25 @@ import articleShortView from '@/components/article/articleShortView.vue'
 import axios from 'axios'
 
 export default {
-  name: 'HomePage',
   components: {
     'header-component': header,
     'articleShortView-component': articleShortView
   },
   data () {
     return {
-      articles: [
-        {
-          title: '',
-          category: '',
-          author: '',
-          tags: [],
-          content: '',
-          likes: ''
-        }
-      ]
+      articles: []
     }
   },
   created () {
-    axios.get('http://localhost:4000/api/query/article/recent')
+    console.log(this.$route.params.category)
+    axios.get('http://localhost:4000/api/query/article/category/' + this.$route.params.category)
       .then(response => {
-        this.articles = response.data;
-        console.log(response.data);
+        this.articles = response.data
       })
       .catch(error =>{
         this.$modal.show('dialog', {
           title: 'Alert',
-          text: 'Something goes wrong',
+          text: 'There is nothing here',
           buttons: [
             {
               title: 'Close'

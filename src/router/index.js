@@ -4,13 +4,18 @@ import EditorPage from '@/components/editor/EditorPage.vue'
 import LoginPage from '@/components/login/LoginPage.vue'
 import RegisterPage from '@/components/registration/RegisterPage.vue'
 import HomePage from '@/components/home/HomePage.vue'
+import articleByCategoryPage from '@/components/articleBy/articleByCategoryPage.vue'
+import article from '@/components/article/articleLongView.vue'
+import articleByAuthor from '@/components/articleBy/articleByAuthor.vue'
+import articleByTag from '@/components/articleBy/articleByTag.vue'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
-      path: '/newArticle',
+      path: '/article/new',
       name: 'EditorPage',
       component: EditorPage
     },
@@ -25,9 +30,29 @@ export default new Router({
       component: RegisterPage
     },
     {
-      path: '/home',
+      path: '/',
       name: 'HomePage',
       component: HomePage
+    },
+    {
+      path: '/category/:category',
+      name: 'articleByCategoryPage',
+      component: articleByCategoryPage
+    },
+    {
+      path: '/article/:title',
+      name: 'article',
+      component: article
+    },
+    {
+      path: '/author/:author',
+      name: 'yourArticles',
+      component: articleByAuthor
+    },
+    {
+      path: '/tag/:tag',
+      name: 'articleTag',
+      component: articleByTag
     }
 
   ]
